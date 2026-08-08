@@ -28,7 +28,10 @@ export const metadata: Metadata = {
   // a placeholder — rather than Next's silent http://localhost:3000 fallback,
   // which looks real enough to ship by accident.
   metadataBase: new URL(canonicalOrigin),
-  title: `${site.name} — Local-first dictation for Windows`,
+  title: `${site.name} Local-first dictation for Windows`,
+  icons: {
+    icon: "/logo.png",
+  },
   description: site.description,
   applicationName: site.name,
   authors: [{ name: site.author }],
@@ -50,7 +53,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — Local-first dictation for Windows`,
+    title: `${site.name} Local-first dictation for Windows`,
     description: site.description,
   },
 };
