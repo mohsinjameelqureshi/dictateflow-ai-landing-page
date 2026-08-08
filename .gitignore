@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+typeflow-landing-brief.md
+typeflow-landing-brief.v1.backup.md

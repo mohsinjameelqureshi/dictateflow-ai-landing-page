@@ -1,0 +1,67 @@
+/**
+ * Single source of truth for every value the owner still has to supply.
+ * Brief §0. Change these here and nowhere else.
+ *
+ * Placeholders are written literally as `TODO_*`. Nothing derives a
+ * half-valid URL from a missing base: `isConfigured` gates every CTA, so it
+ * is impossible to ship the site with a dead primary button by accident.
+ */
+
+const githubUrl = "https://github.com/mohsinjameelqureshi/typeflow-ai";
+const siteUrl = "TODO_SITE_URL";
+
+/**
+ * The one flag. Every CTA reads this — one behaviour, no per-button logic.
+ */
+export const isConfigured = !githubUrl.startsWith("TODO_");
+
+/** True once the owner supplies a canonical origin for OG + canonical tags. */
+export const hasSiteUrl = !siteUrl.startsWith("TODO_");
+
+/**
+ * Used only for `metadataBase` and the sitemap, both of which need an
+ * absolute origin to resolve against. Never rendered to the reader.
+ */
+export const canonicalOrigin = hasSiteUrl
+  ? siteUrl
+  : "https://example.invalid";
+
+export const site = {
+  name: "TypeFlow AI",
+  /** Brief §1 — use verbatim wherever a short description is needed. */
+  tagline: "Local-first desktop dictation for Windows.",
+  description:
+    "Hold a shortcut, speak, release. The text appears in whatever app had focus. Your history, recordings and statistics never leave your machine. Free and open source.",
+  author: "Mohsin Jameel Qureshi",
+  license: "MIT",
+
+  githubUrl,
+  siteUrl,
+  releasesUrl: `${githubUrl}/releases`,
+  issuesUrl: `${githubUrl}/issues`,
+  /** Never a hardcoded filename — the release page always has the current one. */
+  downloadUrl: `${githubUrl}/releases`,
+  securityUrl: `${githubUrl}/blob/main/SECURITY.md`,
+  contributingUrl: `${githubUrl}/blob/main/CONTRIBUTING.md`,
+  licenseUrl: `${githubUrl}/blob/main/LICENSE`,
+
+  version: "1.0.0",
+  installerName: "TypeFlow AI-1.0.0-setup.exe",
+  /** TODO — measured against the 0.1.0 build; confirm for 1.0.0. */
+  installerSize: "~108.6 MB",
+  platform: "Windows x64",
+
+  /**
+   * The owner has this; the release page lists it. While it is `TODO_SHA256`
+   * the checksum row is omitted entirely rather than showing a fake hash
+   * (brief §6.7).
+   */
+  sha256: "TODO_SHA256",
+  contactEmail: "TODO_EMAIL",
+} as const;
+
+export const hasChecksum = !site.sha256.startsWith("TODO_");
+export const hasContactEmail = !site.contactEmail.startsWith("TODO_");
+
+/** Rendered under the primary CTA. Brief §6.2. */
+export const releaseLine = `v${site.version} · ${site.platform} · ${site.installerSize} · unsigned installer`;
