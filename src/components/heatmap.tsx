@@ -121,7 +121,7 @@ export function Heatmap() {
 
       <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
         <figcaption className="text-micro text-fg-subtle">
-          Example &mdash; your data stays on your machine.
+          Example. Your data stays on your machine.
         </figcaption>
 
         {/* The ramp carries a text label at each end, so the scale is never

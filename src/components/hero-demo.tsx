@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { RotateCcw } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
 import { useReducedMotion } from "@/lib/use-reduced-motion";
 import { Kbd } from "@/components/ui/kbd";
@@ -9,9 +8,15 @@ import { Waveform } from "@/components/ui/waveform";
 import { InsertionLine } from "@/components/ui/insertion-line";
 
 /**
- * The hero sequence. It plays once on mount, then stops and offers a Replay
- * button. It does not loop: ambient motion in the first viewport is noise,
- * whereas a single well-timed run is a demonstration.
+ * The hero sequence. It runs on a loop: the gesture is three seconds long and
+ * most readers arrive mid-scroll, so a single pass is easily missed, and
+ * asking someone to press Replay to see the product's core claim is asking
+ * too much. The pause on `rest` is deliberately the longest beat — the
+ * settled sentence is the payoff, not the motion.
+ *
+ * It only runs while it is on screen and the tab is in front. Loops nobody is
+ * watching are pure cost, and the sequence always restarts from a clean idle
+ * frame rather than resuming mid-gesture.
  *
  * The paste beat is the whole animation. The sentence appears in ONE FRAME,
  * because insertion is a clipboard paste and not simulated typing. A
@@ -27,12 +32,17 @@ const BEATS: ReadonlyArray<{ at: number; phase: Phase }> = [
   { at: 600, phase: "hold" }, //     Ctrl and Win depress together.
   { at: 760, phase: "speak" }, //    Waveform animates for 2200ms.
   { at: 2960, phase: "release" }, // Keycaps spring back; waveform goes flat.
-  { at: 3100, phase: "wait" }, //    Caret pulses. The label states 1–2s.
+  { at: 3100, phase: "wait" }, //    Caret pulses. The label states 1-2s.
   { at: 4300, phase: "paste" }, //   The sentence arrives, all at once.
   { at: 4540, phase: "rest" }, //    Settled. Caret resumes after the text.
 ];
 
-const REPLAY_AT = 5000;
+/**
+ * The sentence holds for ~2.5s after it lands, then the card resets and the
+ * next run begins. Long enough to read the payoff, short enough that a reader
+ * glancing over gets a full gesture without waiting.
+ */
+const LOOP_AT = 7000;
 
 /** What the status pill reads at each beat. */
 const STATUS: Record<Phase, string> = {
@@ -54,18 +64,58 @@ export function HeroDemo() {
   // t=0 is also what the server renders: keycaps up, line empty, caret
   // blinking. Hydration is therefore seamless.
   const [phase, setPhase] = useState<Phase>("idle");
-  const [showReplay, setShowReplay] = useState(false);
   const [run, setRun] = useState(0);
+  const [watchable, setWatchable] = useState(true);
+  const cardRef = useRef<HTMLDivElement>(null);
 
+  // Two ways to stop being worth animating: scrolled past, or the tab is in
+  // the background. Either one parks the card on its idle frame, so whatever
+  // is on screen when the reader comes back is the start of a run, not a
+  // frozen middle of one.
   useEffect(() => {
-    if (reduced) return;
+    const card = cardRef.current;
+    if (!card) return;
+
+    let onScreen = true;
+    const settle = () => {
+      const next = onScreen && !document.hidden;
+      setWatchable(next);
+      if (!next) setPhase("idle");
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        onScreen = entry.isIntersecting;
+        settle();
+      },
+      { threshold: 0.3 },
+    );
+    observer.observe(card);
+    document.addEventListener("visibilitychange", settle);
+
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", settle);
+    };
+  }, []);
+
+  // One run's worth of timers. The last one bumps `run`, which re-fires this
+  // effect and arms the next pass — a chain rather than an interval, so a
+  // slow frame can never let two runs overlap.
+  useEffect(() => {
+    if (reduced || !watchable) return;
 
     const timers = BEATS.map((beat) =>
       setTimeout(() => setPhase(beat.phase), beat.at),
     );
-    timers.push(setTimeout(() => setShowReplay(true), REPLAY_AT));
+    timers.push(
+      setTimeout(() => {
+        setPhase("idle");
+        setRun((r) => r + 1);
+      }, LOOP_AT),
+    );
     return () => timers.forEach(clearTimeout);
-  }, [reduced, run]);
+  }, [reduced, watchable, run]);
 
   const current: Phase = reduced ? "rest" : phase;
 
@@ -76,6 +126,7 @@ export function HeroDemo() {
 
   return (
     <div
+      ref={cardRef}
       className={cn(
         "overflow-hidden rounded-card border border-line bg-surface-1",
         "shadow-[var(--shadow-panel)]",
@@ -141,7 +192,7 @@ export function HeroDemo() {
 
           {/* Fixed width so the row cannot reflow as the label changes. */}
           <span className="w-[52px] text-right font-display text-[11px] tabular-nums text-fg-subtle">
-            {current === "wait" ? "1–2s" : ""}
+            {current === "wait" ? "1-2s" : ""}
           </span>
         </div>
       </div>
@@ -151,27 +202,6 @@ export function HeroDemo() {
         the sentence &ldquo;{SENTENCE}&rdquo; into the window that had focus.
       </p>
 
-      <div className="flex h-12 items-center justify-end border-t border-line px-4 md:px-5">
-        {showReplay ? (
-          <button
-            type="button"
-            onClick={() => {
-              setShowReplay(false);
-              setRun((r) => r + 1);
-            }}
-            className={cn(
-              "inline-flex h-8 items-center gap-1.5 rounded-[7px] px-2.5",
-              "text-micro text-fg-muted",
-              "animate-[fade-in_var(--dur-enter)_var(--ease-out)_both]",
-              "transition-colors duration-[var(--dur-press)] ease-[var(--ease-out)]",
-              "hover:bg-surface-2 hover:text-fg",
-            )}
-          >
-            <RotateCcw aria-hidden="true" className="h-3.5 w-3.5" strokeWidth={1.75} />
-            Replay
-          </button>
-        ) : null}
-      </div>
     </div>
   );
 }

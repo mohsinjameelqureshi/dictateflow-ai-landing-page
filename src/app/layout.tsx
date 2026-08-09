@@ -22,13 +22,16 @@ const plex = IBM_Plex_Sans({
   display: "swap",
 });
 
+/* One string, three places. These had already drifted apart once. */
+const pageTitle = `${site.name}: Local-first dictation for Windows`;
+
 export const metadata: Metadata = {
   // Always set, so absolute OG/canonical URLs are deterministic. While
   // `siteUrl` is a TODO this resolves to a reserved .invalid host — obviously
   // a placeholder — rather than Next's silent http://localhost:3000 fallback,
   // which looks real enough to ship by accident.
   metadataBase: new URL(canonicalOrigin),
-  title: `${site.name} Local-first dictation for Windows`,
+  title: pageTitle,
   icons: {
     icon: "/logo.png",
   },
@@ -47,13 +50,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: site.name,
-    title: `${site.name} — Local-first dictation for Windows`,
+    title: pageTitle,
     description: site.description,
     ...(hasSiteUrl ? { url: "/" } : {}),
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} Local-first dictation for Windows`,
+    title: pageTitle,
     description: site.description,
   },
 };

@@ -41,7 +41,7 @@ export function Hero() {
           <Reveal delay={120}>
             <p className="measure-lead mt-6 text-pretty text-lead text-fg-muted">
               Hold <Kbd>Ctrl</Kbd> + <Kbd>Win</Kbd>, speak, release. The text is
-              pasted into whatever application had focus — editor, browser
+              pasted into whatever application had focus: editor, browser
               field, terminal. Your history, recordings and statistics stay on
               your machine.
             </p>

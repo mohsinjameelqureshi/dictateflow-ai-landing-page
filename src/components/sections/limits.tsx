@@ -12,15 +12,15 @@ import { Reveal } from "@/components/ui/reveal";
 const LIMITS = [
   {
     clause: "It cannot type into elevated windows.",
-    body: "Windows blocks a non-elevated process from sending input to one running as administrator — this is UIPI, not a bug. Dictating into an admin terminal shows “Can't type into this window”.",
+    body: "Windows blocks a non-elevated process from sending input to one running as administrator. This is UIPI, not a bug. Dictating into an admin terminal shows “Can't type into this window”.",
   },
   {
     clause: "It needs a network connection.",
-    body: "Expect 1–2 seconds between releasing the key and text appearing. Roughly 95% of that is network round-trip and free-tier queueing, not transcription.",
+    body: "Expect 1-2 seconds between releasing the key and text appearing. Roughly 95% of that is network round-trip and free-tier queueing, not transcription.",
   },
   {
     clause: "Grammar cleanup is off by default.",
-    body: "An LLM pass over Whisper's output measurably deletes words — it has to cut something to make ungrammatical input read cleanly. The raw transcript is always stored and always shown.",
+    body: "An LLM pass over Whisper's output measurably deletes words. It has to cut something to make ungrammatical input read cleanly. The raw transcript is always stored and always shown.",
   },
   {
     clause: "Very short or very quiet clips are dropped.",

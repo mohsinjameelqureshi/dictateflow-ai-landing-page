@@ -135,8 +135,8 @@ export function HowItWorks() {
 
         <figcaption className="measure mx-auto mt-5 text-center text-small text-fg-subtle">
           The text arrives in the window that already had focus. Nothing is
-          typed character by character &mdash; insertion is a clipboard paste,
-          and your clipboard is restored afterwards.
+          typed character by character: insertion is a clipboard paste, and
+          your clipboard is restored afterwards.
         </figcaption>
       </Reveal>
     </Section>

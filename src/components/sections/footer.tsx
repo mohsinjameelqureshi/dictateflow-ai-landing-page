@@ -1,4 +1,4 @@
-import { isConfigured, site } from "@/config/site";
+import { hasContactEmail, isConfigured, site } from "@/config/site";
 import { Logo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { CtaTodoNote } from "@/components/ui/cta";
@@ -60,6 +60,23 @@ export function Footer() {
                   )}
                 </li>
               ))}
+
+              {/* A mailto, so it works regardless of whether the repository
+                  URL has been supplied. */}
+              {hasContactEmail ? (
+                <li>
+                  <a
+                    href={`mailto:${site.contactEmail}`}
+                    className={cn(
+                      "text-small text-fg-muted",
+                      "transition-colors duration-[var(--dur-press)] ease-[var(--ease-out)]",
+                      "hover:text-fg",
+                    )}
+                  >
+                    Contact
+                  </a>
+                </li>
+              ) : null}
             </ul>
           </nav>
         </div>

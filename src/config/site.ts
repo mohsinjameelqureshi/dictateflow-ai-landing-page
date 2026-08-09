@@ -46,18 +46,18 @@ export const site = {
   licenseUrl: `${githubUrl}/blob/main/LICENSE`,
 
   version: "1.0.0",
-  installerName: "TypeFlow AI-1.0.0-setup.exe",
-  /** TODO — measured against the 0.1.0 build; confirm for 1.0.0. */
-  installerSize: "~108.6 MB",
+  installerName: "typeflow-ai.exe",
+  installerSize: "109 MB",
   platform: "Windows x64",
 
   /**
-   * The owner has this; the release page lists it. While it is `TODO_SHA256`
-   * the checksum row is omitted entirely rather than showing a fake hash
-   * (brief §6.7).
+   * Matches `Get-FileHash .\typeflow-ai.exe` (uppercase, as PowerShell prints
+   * it) so a reader can compare the two strings by eye. While it is
+   * `TODO_SHA256` the checksum row is omitted entirely rather than showing a
+   * fake hash (brief §6.7).
    */
-  sha256: "TODO_SHA256",
-  contactEmail: "TODO_EMAIL",
+  sha256: "94DDCDE76545B90D49A1617729C770ECDEA7D3C30BF5839DDEEE3C9773A8F65A",
+  contactEmail: "qureshimohsinjameel@gmail.com",
 } as const;
 
 export const hasChecksum = !site.sha256.startsWith("TODO_");

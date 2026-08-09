@@ -109,8 +109,10 @@ export function GhostLink({
   className?: string;
 }) {
   const classes = cn(
-    "inline-flex items-center gap-1.5 text-small underline decoration-line",
-    "underline-offset-[5px]",
+    // min-h-8 keeps it a comfortable target when it stands alone at the end
+    // of a section, which is the only way it is used.
+    "inline-flex min-h-8 items-center gap-1.5 text-small underline",
+    "decoration-line underline-offset-[5px]",
     "transition-colors duration-[var(--dur-press)] ease-[var(--ease-out)]",
     className,
   );

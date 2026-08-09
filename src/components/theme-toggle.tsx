@@ -15,10 +15,13 @@ const OPTIONS = [
 }>;
 
 /**
- * Dark leads the group because dark is the page's primary mode.
+ * Icon-only, so it sits quietly in the footer rather than competing with the
+ * link columns. Dark leads the group because dark is the page's primary mode.
  *
- * The selected option is marked by a filled surface *and* aria-pressed, never
- * by colour alone.
+ * Dropping the visible text means each control needs its name supplied
+ * another way: `aria-label` carries it for assistive tech, `title` gives
+ * sighted mouse users the same string on hover, and the current choice is
+ * announced by `aria-pressed` rather than by the filled surface alone.
  */
 export function ThemeToggle() {
   const theme = useTheme();
@@ -36,17 +39,18 @@ export function ThemeToggle() {
             key={value}
             type="button"
             aria-pressed={selected}
+            aria-label={`${label} theme`}
+            title={`${label} theme`}
             onClick={() => setTheme(value)}
             className={cn(
-              "inline-flex h-8 items-center gap-1.5 rounded-[7px] px-2.5 text-micro",
+              "inline-flex h-8 w-8 items-center justify-center rounded-[7px]",
               "transition-colors duration-[var(--dur-press)] ease-[var(--ease-out)]",
               selected
                 ? "bg-surface-3 text-fg"
-                : "text-fg-muted hover:text-fg",
+                : "text-fg-muted hover:bg-surface-2 hover:text-fg",
             )}
           >
-            <Icon aria-hidden="true" className="h-3.5 w-3.5" strokeWidth={1.75} />
-            {label}
+            <Icon aria-hidden="true" className="h-4 w-4" strokeWidth={1.75} />
           </button>
         );
       })}

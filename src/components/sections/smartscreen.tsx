@@ -25,7 +25,7 @@ export function SmartScreen() {
         <Reveal>
           <Callout>
             <p className="text-body text-fg-muted">
-              The installer is not code signed &mdash; a certificate costs a few
+              The installer is not code signed. A certificate costs a few
               hundred dollars a year, which is not justified for a personal
               project given away for free. Windows SmartScreen will say
               &ldquo;Windows protected your PC&rdquo;. Click{" "}
@@ -46,7 +46,7 @@ export function SmartScreen() {
             {hasChecksum ? (
               <div className="mt-6">
                 <p className="text-micro text-fg-subtle">
-                  SHA256 &mdash; {site.installerName}
+                  SHA256 &middot; {site.installerName}
                 </p>
                 <CodeBlock
                   className="mt-2"

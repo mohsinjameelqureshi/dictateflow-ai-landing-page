@@ -6,7 +6,7 @@ import { site } from "@/config/site";
 
 const BUILD_COMMANDS = `git clone ${site.githubUrl}
 cd typeflow-ai
-npm install     # postinstall runs electron-rebuild — do not skip it
+npm install     # postinstall runs electron-rebuild, do not skip it
 npm run dev     # development, with hot reload
 npm run dist    # produces the installer in release/`;
 
@@ -29,8 +29,8 @@ const STEPS = [
           className="font-mono text-code text-accent-text underline decoration-line underline-offset-4 hover:decoration-accent-text"
         >
           console.groq.com
-        </a>{" "}
-        &mdash; free tier, no card required. It starts with{" "}
+        </a>
+        . Free tier, no card required. It starts with{" "}
         <code className="font-mono text-code text-fg">gsk_</code>.
       </>
     ),

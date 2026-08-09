@@ -12,7 +12,7 @@ import { Reveal } from "@/components/ui/reveal";
 const FAQ = [
   {
     q: "Is it free?",
-    a: "Yes, MIT licensed. You pay nothing for the app. Transcription runs on Groq's free tier with your own key — also free, no card required.",
+    a: "Yes, MIT licensed. You pay nothing for the app. Transcription runs on Groq's free tier with your own key. That is also free, and no card is required.",
   },
   {
     q: "Do I need an account?",
@@ -32,7 +32,7 @@ const FAQ = [
   },
   {
     q: "How fast is it?",
-    a: "1–2 seconds from releasing the key to text appearing. About 95% of that is network round-trip and free-tier queueing.",
+    a: "1-2 seconds from releasing the key to text appearing. About 95% of that is network round-trip and free-tier queueing.",
   },
   {
     q: "Can it type into my admin terminal?",
@@ -44,7 +44,7 @@ const FAQ = [
   },
   {
     q: "Can I fix words it always gets wrong?",
-    a: "Yes — the Dictionary is find-and-replace applied after transcription, and its entries also prime Whisper so some errors never happen.",
+    a: "Yes. The Dictionary is find-and-replace applied after transcription, and its entries also prime Whisper so some errors never happen.",
   },
   {
     q: "Is my API key safe?",
