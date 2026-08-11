@@ -1,1 +1,1 @@
-TypeFlow AI: the headline "Hold a key. Speak. The text is just there." above an empty text field with a blinking caret, and the Ctrl and Win keycaps.
+DictateFlow AI: the headline "Hold a key. Speak. The text is just there." above an empty text field with a blinking caret, and the Ctrl and Win keycaps.

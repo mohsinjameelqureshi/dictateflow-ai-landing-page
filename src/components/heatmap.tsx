@@ -1,4 +1,4 @@
-const WEEKS = 53;
+const WEEKS = 60;
 const DAYS = 7;
 
 const HEAT_CLASS = [
@@ -19,6 +19,8 @@ const HEAT_CLASS = [
  * columns rather than being clipped.
  */
 const GLYPHS: Record<string, string[]> = {
+  C: ["###", "#..", "#..", "#..", "###"],
+  D: ["##.", "#.#", "#.#", "#.#", "##."],
   T: ["###", ".#.", ".#.", ".#.", ".#."],
   Y: ["#.#", "#.#", ".#.", ".#.", ".#."],
   P: ["##.", "#.#", "##.", "#..", "#.."],
@@ -32,7 +34,7 @@ const GLYPHS: Record<string, string[]> = {
   " ": ["..", "..", "..", "..", ".."],
 };
 
-const WORD = "TYPEFLOW AI";
+const WORD = "DICTATEFLOW AI";
 
 /** Column offsets of every lit cell, keyed as `col:row`. */
 function renderWord(): { lit: Set<string>; width: number } {

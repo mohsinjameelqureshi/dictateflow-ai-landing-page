@@ -19,7 +19,7 @@ const STAYS = [
   {
     icon: FileText,
     title: "Transcripts and history",
-    detail: "SQLite, at %APPDATA%\\typeflow-ai",
+    detail: "SQLite, at %APPDATA%\\dictateflow-ai",
   },
   {
     icon: Mic,

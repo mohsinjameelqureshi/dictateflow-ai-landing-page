@@ -68,7 +68,7 @@ export const metadata: Metadata = {
    2. Resolves the colour theme so there is no flash of the wrong one. Dark is
       the default; an explicit choice stamps data-theme, and "system" leaves
       the attribute off so prefers-color-scheme decides. */
-const bootScript = `(function(){var d=document.documentElement;d.classList.add("js");try{var t=localStorage.getItem("typeflow-theme");if(t==="light"||t==="dark"){d.setAttribute("data-theme",t)}else{d.removeAttribute("data-theme")}}catch(e){}})()`;
+const bootScript = `(function(){var d=document.documentElement;d.classList.add("js");try{var t=localStorage.getItem("dictateflow-theme");if(t==="light"||t==="dark"){d.setAttribute("data-theme",t)}else{d.removeAttribute("data-theme")}}catch(e){}})()`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (

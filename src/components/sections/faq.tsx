@@ -20,7 +20,7 @@ const FAQ = [
   },
   {
     q: "Where is my data?",
-    a: "In a SQLite file and a recordings folder under %APPDATA%\\typeflow-ai. Export everything to plain JSON whenever you like.",
+    a: "In a SQLite file and a recordings folder under %APPDATA%\\dictateflow-ai. Export everything to plain JSON whenever you like.",
   },
   {
     q: "Is there a Mac or Linux version?",

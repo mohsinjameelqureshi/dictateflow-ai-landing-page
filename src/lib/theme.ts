@@ -4,7 +4,7 @@ import { useSyncExternalStore } from "react";
 
 export type Theme = "light" | "dark" | "system";
 
-export const THEME_STORAGE_KEY = "typeflow-theme";
+export const THEME_STORAGE_KEY = "dictateflow-theme";
 
 /**
  * A minimal external store so the toggle can read the persisted preference

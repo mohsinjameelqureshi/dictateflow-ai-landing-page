@@ -7,7 +7,7 @@
  * is impossible to ship the site with a dead primary button by accident.
  */
 
-const githubUrl = "https://github.com/mohsinjameelqureshi/typeflow-ai";
+const githubUrl = "https://github.com/mohsinjameelqureshi/dictateflow-ai";
 const siteUrl = "TODO_SITE_URL";
 
 /**
@@ -27,7 +27,7 @@ export const canonicalOrigin = hasSiteUrl
   : "https://example.invalid";
 
 export const site = {
-  name: "TypeFlow AI",
+  name: "DictateFlow AI",
   /** Brief §1 — use verbatim wherever a short description is needed. */
   tagline: "Local-first desktop dictation for Windows.",
   description:
@@ -46,12 +46,12 @@ export const site = {
   licenseUrl: `${githubUrl}/blob/main/LICENSE`,
 
   version: "1.0.0",
-  installerName: "typeflow-ai.exe",
+  installerName: "dictateflow-ai.exe",
   installerSize: "109 MB",
   platform: "Windows x64",
 
   /**
-   * Matches `Get-FileHash .\typeflow-ai.exe` (uppercase, as PowerShell prints
+   * Matches `Get-FileHash .\dictateflow-ai.exe` (uppercase, as PowerShell prints
    * it) so a reader can compare the two strings by eye. While it is
    * `TODO_SHA256` the checksum row is omitted entirely rather than showing a
    * fake hash (brief §6.7).

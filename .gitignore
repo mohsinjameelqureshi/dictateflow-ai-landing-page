@@ -40,5 +40,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-typeflow-landing-brief.md
-typeflow-landing-brief.v1.backup.md
+dictateflow-landing-brief.md
+dictateflow-landing-brief.v1.backup.md
