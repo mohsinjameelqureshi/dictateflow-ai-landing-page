@@ -22,9 +22,7 @@ export const hasSiteUrl = !siteUrl.startsWith("TODO_");
  * Used only for `metadataBase` and the sitemap, both of which need an
  * absolute origin to resolve against. Never rendered to the reader.
  */
-export const canonicalOrigin = hasSiteUrl
-  ? siteUrl
-  : "https://example.invalid";
+export const canonicalOrigin = hasSiteUrl ? siteUrl : "https://example.invalid";
 
 export const site = {
   name: "DictateFlow AI",
@@ -56,7 +54,7 @@ export const site = {
    * `TODO_SHA256` the checksum row is omitted entirely rather than showing a
    * fake hash (brief §6.7).
    */
-  sha256: "94DDCDE76545B90D49A1617729C770ECDEA7D3C30BF5839DDEEE3C9773A8F65A",
+  sha256: "EA25E5771F7A21B7DCAF2CC6AEC7D6979665BA20300AA4D1E2537AE2CB7D1C1F",
   contactEmail: "qureshimohsinjameel@gmail.com",
 } as const;
 
