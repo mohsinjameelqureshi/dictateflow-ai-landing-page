@@ -8,7 +8,7 @@
  */
 
 const githubUrl = "https://github.com/mohsinjameelqureshi/dictateflow-ai";
-const siteUrl = "TODO_SITE_URL";
+const siteUrl = "https://dictateflow-ai.mohsinjameel.dev";
 
 /**
  * The one flag. Every CTA reads this — one behaviour, no per-button logic.
@@ -16,7 +16,7 @@ const siteUrl = "TODO_SITE_URL";
 export const isConfigured = !githubUrl.startsWith("TODO_");
 
 /** True once the owner supplies a canonical origin for OG + canonical tags. */
-export const hasSiteUrl = !siteUrl.startsWith("TODO_");
+export const hasSiteUrl = siteUrl.startsWith("https://");
 
 /**
  * Used only for `metadataBase` and the sitemap, both of which need an
