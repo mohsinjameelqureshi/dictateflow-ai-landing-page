@@ -1,4 +1,4 @@
-import { hasSiteUrl, site } from "@/config/site";
+import { canonicalOrigin, hasSiteUrl, site } from "@/config/site";
 
 /**
  * Brief §8. Only fields that are true — notably no `aggregateRating`, because
@@ -14,6 +14,11 @@ export function JsonLd() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Windows",
     softwareVersion: site.version,
+    /* Only what the site itself claims. No minimum Windows build is stated
+       anywhere on the page, so none is asserted here. */
+    softwareRequirements: site.platform,
+    fileSize: site.installerSize,
+    downloadUrl: site.downloadUrl,
     license: "https://opensource.org/licenses/MIT",
     isAccessibleForFree: true,
     author: { "@type": "Person", name: site.author },
@@ -22,7 +27,9 @@ export function JsonLd() {
       price: "0",
       priceCurrency: "USD",
     },
-    ...(hasSiteUrl ? { url: site.siteUrl } : {}),
+    ...(hasSiteUrl
+      ? { url: site.siteUrl, image: `${canonicalOrigin}/opengraph-image.png` }
+      : {}),
   };
 
   return (

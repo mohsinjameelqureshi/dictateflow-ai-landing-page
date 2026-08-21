@@ -30,6 +30,15 @@ export const site = {
   tagline: "Local-first desktop dictation for Windows.",
   description:
     "Hold a shortcut, speak, release. The text appears in whatever app had focus. Transcribe in the cloud or fully offline on your own machine. Your history, recordings and statistics never leave it. Free and open source.",
+  /**
+   * The one above is 216 characters, which Google truncates at roughly 155,
+   * cutting off "Free and open source" - the strongest differentiator. This
+   * shorter cut is used for the meta description only; OG and schema keep the
+   * full text, where there is no such limit. It also carries the category
+   * words a searcher actually types, which the headline voice does not.
+   */
+  searchDescription:
+    "Free, open-source voice typing for Windows. Hold a shortcut, speak, release: the text appears in any app. Fully offline speech to text, or cloud.",
   author: "Mohsin Jameel Qureshi",
   license: "MIT",
 

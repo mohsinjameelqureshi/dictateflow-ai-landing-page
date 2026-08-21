@@ -33,9 +33,10 @@ export const metadata: Metadata = {
   metadataBase: new URL(canonicalOrigin),
   title: pageTitle,
   icons: {
-    icon: "/logo.png",
+    icon: "/icon-32.png",
+    apple: "/apple-touch-icon.png",
   },
-  description: site.description,
+  description: site.searchDescription,
   applicationName: site.name,
   authors: [{ name: site.author }],
   keywords: [
