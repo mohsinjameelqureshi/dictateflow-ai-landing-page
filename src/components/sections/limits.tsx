@@ -15,16 +15,24 @@ const LIMITS = [
     body: "Windows blocks a non-elevated process from sending input to one running as administrator. This is UIPI, not a bug. Dictating into an admin terminal shows “Can't type into this window”.",
   },
   {
-    clause: "It needs a network connection.",
-    body: "Expect 1-2 seconds between releasing the key and text appearing. Roughly 95% of that is network round-trip and free-tier queueing, not transcription.",
+    clause: "Groq needs a network connection.",
+    body: "On the cloud engine, expect 1-2 seconds between releasing the key and text appearing. Roughly 95% of that is network round-trip and free-tier queueing, not transcription. Moonshine needs no connection at all once its model is downloaded.",
+  },
+  {
+    clause: "Moonshine is English only.",
+    body: "A licensing boundary, not a capability one. Its English weights are MIT licensed; every other language is released under a non-commercial licence, so this app does not ship them.",
+  },
+  {
+    clause: "Moonshine is slower per clip.",
+    body: "Roughly half the length of what you spoke, against 1-2 seconds for the cloud. A 10 second dictation is about 5 seconds of local compute. Longer clips close the gap.",
   },
   {
     clause: "Grammar cleanup is off by default.",
-    body: "An LLM pass over Whisper's output measurably deletes words. It has to cut something to make ungrammatical input read cleanly. The raw transcript is always stored and always shown.",
+    body: "An LLM pass over transcribed speech measurably deletes words: it has to cut something to make ungrammatical input read cleanly. It ships behind Settings → Experimental, guarded by a detector that discards the result and keeps the raw transcript whenever a word carrying meaning goes missing. The worst case is that nothing happened.",
   },
   {
     clause: "Very short or very quiet clips are dropped.",
-    body: "Anything under 400ms or below the amplitude floor returns “Didn't catch that”, because Whisper invents confident text out of silence.",
+    body: "Anything under 400ms or below the amplitude floor returns “Didn't catch that”, because a speech model invents confident text out of silence.",
   },
   {
     clause: "Windows only.",
@@ -42,7 +50,7 @@ export function Limits() {
       id="limits"
       eyebrow="Known limits"
       heading="What it does not do."
-      lead="Six things, stated plainly. This list is a feature of the page, not a disclaimer at the bottom of it."
+      lead="Eight things, stated plainly. This list is a feature of the page, not a disclaimer at the bottom of it."
     >
       <div className="container-narrow">
         <ol className="border-t border-line">

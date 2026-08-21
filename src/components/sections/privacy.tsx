@@ -2,19 +2,22 @@ import {
   ArrowDown,
   ArrowRight,
   AudioLines,
+  CloudOff,
   FileText,
   KeyRound,
   Laptop,
   Mic,
   SlidersHorizontal,
+  WandSparkles,
 } from "lucide-react";
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 import { GhostLink } from "@/components/ui/cta";
+import { Callout } from "@/components/ui/callout";
 import { site } from "@/config/site";
 import { cn } from "@/lib/cn";
 
-/** Everything that never crosses the boundary. */
+/** Everything that never crosses the boundary, on either engine. */
 const STAYS = [
   {
     icon: FileText,
@@ -44,11 +47,13 @@ const NOT_COLLECTED = ["No telemetry", "No analytics", "No crash reporting"];
  * The strongest section on the page, so it is the one place that gets a
  * diagram rather than a list.
  *
- * The claim is about a *boundary* — one thing crosses it and nothing else
- * does. Two lists side by side cannot make that claim; they just assert it
- * twice. So the machine is drawn as an actual enclosure, the four things that
- * stay sit inside it, and a single accent path leaves the frame. The argument
- * is the picture, and the emptiness on the outbound side is deliberate.
+ * The claim is about a *boundary*. It used to be that exactly one thing
+ * crossed it; now the number is zero or one depending on the engine, which is
+ * a better claim but a harder picture. The enclosure and the four things
+ * inside it are unchanged — they never cross on either engine — and the
+ * outbound side became a pair: an empty destination for Moonshine and the
+ * audio clip for Groq. The emptiness of the first card is the argument, so it
+ * is drawn at the same weight as the second rather than as a footnote.
  */
 export function Privacy() {
   return (
@@ -58,14 +63,14 @@ export function Privacy() {
       air
       heading={
         <>
-          One thing leaves your computer:{" "}
-          <span className="text-accent-text">the audio clip.</span>
+          What leaves your computer{" "}
+          <span className="text-accent-text">depends on the engine.</span>
         </>
       }
-      lead="That is the entire network surface. Everything else the app knows about you stays inside the box below."
+      lead="That is the only thing the choice changes. Everything else the app knows about you stays inside the box below, whichever engine you pick."
     >
       <Reveal>
-        <div className="grid items-center gap-0 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,260px)]">
+        <div className="grid items-center gap-0 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,280px)]">
           {/* ---------------------------------------------- the machine -- */}
           <div className="relative rounded-card border border-line bg-surface-1 p-5 pt-7 shadow-[var(--shadow-panel)] md:p-7 md:pt-8">
             {/* The label sits astride the top border, so the panel reads as a
@@ -116,7 +121,7 @@ export function Privacy() {
           >
             <div className="flex flex-col items-center gap-2 lg:w-full">
               <span className="whitespace-nowrap font-display text-[11px] uppercase tracking-[0.1em] text-accent-text">
-                the audio clip
+                nothing, or one clip
               </span>
 
               <div className="flex items-center gap-1.5 lg:w-full">
@@ -146,34 +151,82 @@ export function Privacy() {
               />
 
               <span className="whitespace-nowrap font-display text-[10.5px] uppercase tracking-[0.08em] text-fg-subtle">
-                one call
+                per engine
               </span>
             </div>
           </div>
 
-          {/* ------------------------------------------- the destination -- */}
-          <div className="relative overflow-hidden rounded-card border border-dashed border-accent/45 bg-surface-1 p-5 text-center md:p-6">
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 bg-accent-soft opacity-60"
-            />
-            <div className="relative">
-              <AudioLines
+          {/* ------------------------------------------ the destinations -- */}
+          <div className="grid gap-3">
+            {/* Moonshine. Deliberately the emptier card, and deliberately
+                first: it is the stronger claim of the two. */}
+            <div className="rounded-card border border-line bg-surface-1 p-5 text-center">
+              <CloudOff
                 aria-hidden="true"
-                className="mx-auto h-5 w-5 text-accent-text"
+                className="mx-auto h-5 w-5 text-fg-muted"
                 strokeWidth={1.75}
               />
               <h3 className="mt-3 text-small font-medium text-fg">
-                Groq, to be transcribed
+                With Moonshine, nothing
               </h3>
-              <p className="mt-1.5 font-mono text-[11.5px] text-accent-text">
-                whisper large-v3-turbo
-              </p>
               <p className="mt-3 text-micro text-fg-muted">
-                The clip is sent, transcribed, and that is the end of it.
+                After the one-time model download the app makes no network
+                requests at all.
               </p>
             </div>
+
+            {/* Groq. The one card on the page that is allowed to look like a
+                destination outside the enclosure. */}
+            <div className="relative overflow-hidden rounded-card border border-dashed border-accent/45 bg-surface-1 p-5 text-center">
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 bg-accent-soft opacity-60"
+              />
+              <div className="relative">
+                <AudioLines
+                  aria-hidden="true"
+                  className="mx-auto h-5 w-5 text-accent-text"
+                  strokeWidth={1.75}
+                />
+                <h3 className="mt-3 text-small font-medium text-fg">
+                  With Groq, the audio clip
+                </h3>
+                <p className="mt-1.5 font-mono text-[11.5px] text-accent-text">
+                  whisper large-v3-turbo
+                </p>
+                <p className="mt-3 text-micro text-fg-muted">
+                  Sent, transcribed, and that is the end of it. That is the
+                  entire network surface.
+                </p>
+              </div>
+            </div>
           </div>
+        </div>
+      </Reveal>
+
+      {/* --------------------------------------- the one honest asterisk -- */}
+      {/* Omitting this would make the offline claim overstated, which is the
+          only way this section can actually fail. */}
+      <Reveal delay={100} className="mt-10">
+        <div className="container-narrow">
+          <Callout>
+            <div className="flex flex-col gap-4 sm:flex-row">
+              <WandSparkles
+                aria-hidden="true"
+                className="h-5 w-5 shrink-0 text-accent-text"
+                strokeWidth={1.5}
+              />
+              <p className="text-body text-fg-muted">
+                <strong className="font-semibold text-fg">
+                  One asterisk: grammar cleanup is a Groq call regardless of
+                  which engine transcribed.
+                </strong>{" "}
+                Turning it on while using Moonshine gives up the offline
+                guarantee for that one step. It is off by default, and the rest
+                of the pipeline is unaffected either way.
+              </p>
+            </div>
+          </Callout>
         </div>
       </Reveal>
 

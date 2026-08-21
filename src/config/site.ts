@@ -29,7 +29,7 @@ export const site = {
   /** Brief §1 — use verbatim wherever a short description is needed. */
   tagline: "Local-first desktop dictation for Windows.",
   description:
-    "Hold a shortcut, speak, release. The text appears in whatever app had focus. Your history, recordings and statistics never leave your machine. Free and open source.",
+    "Hold a shortcut, speak, release. The text appears in whatever app had focus. Transcribe in the cloud or fully offline on your own machine. Your history, recordings and statistics never leave it. Free and open source.",
   author: "Mohsin Jameel Qureshi",
   license: "MIT",
 

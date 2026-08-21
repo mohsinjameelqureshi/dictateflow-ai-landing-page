@@ -1,4 +1,4 @@
-import { EyeOff, KeyRound, Scale, UserX } from "lucide-react";
+import { EyeOff, Scale, UserX, WifiOff } from "lucide-react";
 import { releaseLine, site } from "@/config/site";
 import { Kbd } from "@/components/ui/kbd";
 import { ActionLink } from "@/components/ui/cta";
@@ -6,11 +6,15 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { Reveal } from "@/components/ui/reveal";
 import { HeroDemo } from "@/components/hero-demo";
 
+/* "Bring your own Groq key" used to sit in this row. It is now true of only
+   one of the two engines, and a blanket claim that overstates a prerequisite
+   is worse than no claim: the offline path needs no key at all. The row
+   carries the choice instead, which is also the strongest new thing to say. */
 const TRUST = [
   { icon: Scale, label: "MIT licensed" },
   { icon: UserX, label: "No account required" },
   { icon: EyeOff, label: "No telemetry" },
-  { icon: KeyRound, label: "Bring your own Groq key" },
+  { icon: WifiOff, label: "Optional offline mode" },
 ] as const;
 
 /**
@@ -42,8 +46,21 @@ export function Hero() {
             <p className="measure-lead mt-6 text-pretty text-lead text-fg-muted">
               Hold <Kbd>Ctrl</Kbd> + <Kbd>Win</Kbd>, speak, release. The text is
               pasted into whatever application had focus: editor, browser
-              field, terminal. Your history, recordings and statistics stay on
-              your machine.
+              field, terminal.
+            </p>
+          </Reveal>
+
+          {/* The second line, and the reason it is a line rather than a badge
+              in the trust row: the choice between cloud and on-device is the
+              product's strongest claim, and it was previously invisible above
+              the fold. */}
+          <Reveal delay={150}>
+            <p className="measure-lead mt-4 text-pretty text-lead text-fg">
+              Transcribe in the cloud, or{" "}
+              <span className="text-accent-text">
+                entirely on your own machine
+              </span>
+              . Your history, recordings and statistics stay there either way.
             </p>
           </Reveal>
 

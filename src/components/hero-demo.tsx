@@ -44,12 +44,17 @@ const BEATS: ReadonlyArray<{ at: number; phase: Phase }> = [
  */
 const LOOP_AT = 7000;
 
-/** What the status pill reads at each beat. */
+/** What the status pill reads at each beat.
+ *
+ *  `release` used to read "Sent", which is only true on the cloud engine and
+ *  sits directly above a hero line offering an engine that sends nothing.
+ *  "Captured" is true on both. The 1-2s label below stays as it is: the
+ *  demonstration depicts the default engine, and that is its number. */
 const STATUS: Record<Phase, string> = {
   idle: "Ready",
   hold: "Listening",
   speak: "Recording",
-  release: "Sent",
+  release: "Captured",
   wait: "Transcribing",
   paste: "Pasted",
   rest: "Pasted",

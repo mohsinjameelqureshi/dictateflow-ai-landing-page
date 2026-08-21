@@ -14,7 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: `${canonicalOrigin}/`,
-      lastModified: new Date("2026-08-09"),
+      lastModified: new Date("2026-08-21"),
       changeFrequency: "monthly",
       priority: 1,
     },

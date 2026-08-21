@@ -9,6 +9,7 @@ import { GithubMark } from "@/components/icons/github-mark";
 import { ActionLink } from "@/components/ui/cta";
 
 const ANCHORS = [
+  { href: "#engines", label: "Engines" },
   { href: "#how-it-works", label: "How it works" },
   { href: "#privacy", label: "Privacy" },
   { href: "#features", label: "Features" },

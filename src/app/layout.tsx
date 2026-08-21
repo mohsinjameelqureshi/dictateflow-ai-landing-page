@@ -43,8 +43,11 @@ export const metadata: Metadata = {
     "speech to text",
     "Windows",
     "local-first",
+    "offline dictation",
+    "on-device speech to text",
     "open source",
     "Whisper",
+    "Moonshine",
   ],
   ...(hasSiteUrl ? { alternates: { canonical: "/" } } : {}),
   openGraph: {
