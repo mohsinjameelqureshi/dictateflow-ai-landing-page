@@ -29,9 +29,9 @@ export const site = {
   /** Brief §1 — use verbatim wherever a short description is needed. */
   tagline: "Local-first desktop dictation for Windows.",
   description:
-    "Hold a shortcut, speak, release. The text appears in whatever app had focus. Transcribe in the cloud or fully offline on your own machine. Your history, recordings and statistics never leave it. Free and open source.",
+    "Hold a shortcut, speak, release. The text appears in whatever app had focus. Tap another shortcut and a rule you wrote rewrites the text already there. Transcribe in the cloud or fully offline on your own machine. Your history, recordings and statistics never leave it. Free and open source.",
   /**
-   * The one above is 216 characters, which Google truncates at roughly 155,
+   * The one above is well past 155 characters, where Google truncates,
    * cutting off "Free and open source" - the strongest differentiator. This
    * shorter cut is used for the meta description only; OG and schema keep the
    * full text, where there is no such limit. It also carries the category
@@ -48,13 +48,16 @@ export const site = {
   issuesUrl: `${githubUrl}/issues`,
   /** Never a hardcoded filename — the release page always has the current one. */
   downloadUrl: `${githubUrl}/releases`,
+  /** The band that names a version links at that version's notes, not the
+      releases index, so "what changed" is one click and not a search. */
+  releaseNotesUrl: `${githubUrl}/releases/tag/v1.1.0`,
   securityUrl: `${githubUrl}/blob/main/SECURITY.md`,
   contributingUrl: `${githubUrl}/blob/main/CONTRIBUTING.md`,
   licenseUrl: `${githubUrl}/blob/main/LICENSE`,
 
-  version: "1.0.0",
+  version: "1.1.0",
   installerName: "dictateflow-ai.exe",
-  installerSize: "109 MB",
+  installerSize: "114 MB",
   platform: "Windows x64",
 
   /**
@@ -63,7 +66,7 @@ export const site = {
    * `TODO_SHA256` the checksum row is omitted entirely rather than showing a
    * fake hash (brief §6.7).
    */
-  sha256: "EA25E5771F7A21B7DCAF2CC6AEC7D6979665BA20300AA4D1E2537AE2CB7D1C1F",
+  sha256: "4CFE9E450E9C41DD8A61DE7C84419F3E510FFB73D7D21118FC55823B22B685C5",
   contactEmail: "qureshimohsinjameel@gmail.com",
 } as const;
 

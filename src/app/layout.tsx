@@ -49,6 +49,9 @@ export const metadata: Metadata = {
     "open source",
     "Whisper",
     "Moonshine",
+    "prompt enhancer",
+    "rewrite text in place",
+    "text transformation shortcut",
   ],
   ...(hasSiteUrl ? { alternates: { canonical: "/" } } : {}),
   openGraph: {

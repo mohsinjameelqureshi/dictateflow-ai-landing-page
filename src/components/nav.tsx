@@ -11,6 +11,7 @@ import { ActionLink } from "@/components/ui/cta";
 const ANCHORS = [
   { href: "#engines", label: "Engines" },
   { href: "#how-it-works", label: "How it works" },
+  { href: "#transform", label: "Transform" },
   { href: "#privacy", label: "Privacy" },
   { href: "#features", label: "Features" },
   { href: "#limits", label: "Limits" },

@@ -1,4 +1,4 @@
-import { EyeOff, Scale, UserX, WifiOff } from "lucide-react";
+import { ArrowRight, EyeOff, Scale, UserX, WifiOff } from "lucide-react";
 import { releaseLine, site } from "@/config/site";
 import { Kbd } from "@/components/ui/kbd";
 import { ActionLink } from "@/components/ui/cta";
@@ -50,11 +50,23 @@ export function Hero() {
             </p>
           </Reveal>
 
-          {/* The second line, and the reason it is a line rather than a badge
-              in the trust row: the choice between cloud and on-device is the
-              product's strongest claim, and it was previously invisible above
-              the fold. */}
+          {/* The second gesture, written to mirror the first line word for
+              word: hold to put text in, tap to change the text that is
+              already in. The parallel is the pitch. */}
           <Reveal delay={150}>
+            <p className="measure-lead mt-4 text-pretty text-lead text-fg-muted">
+              Tap <Kbd>Ctrl</Kbd> + <Kbd>Alt</Kbd> + <Kbd>E</Kbd> and a rule
+              you wrote rewrites the text that is already there, in the same
+              field, without switching windows.
+            </p>
+          </Reveal>
+
+          {/* The engine line, and the reason it is a line rather than a badge
+              in the trust row: the choice between cloud and on-device is the
+              product's strongest claim, and a badge would not carry it. It
+              also has to sit under both gestures, because it qualifies the
+              first one and not the second. */}
+          <Reveal delay={180}>
             <p className="measure-lead mt-4 text-pretty text-lead text-fg">
               Transcribe in the cloud, or{" "}
               <span className="text-accent-text">
@@ -64,9 +76,34 @@ export function Hero() {
             </p>
           </Reveal>
 
+          {/* The one badge on the page. It links, because a reader who
+              notices it wants the section and not the fact. */}
+          <Reveal delay={210}>
+            <a
+              href="#transform"
+              className={
+                "mt-9 inline-flex items-center gap-2.5 rounded-chip border " +
+                "border-accent/30 bg-accent-soft py-1.5 pl-2.5 pr-3 " +
+                "transition-colors duration-[var(--dur-press)] " +
+                "ease-[var(--ease-out)] hover:border-accent/60"
+              }
+            >
+              <span className="font-display text-[10.5px] font-semibold uppercase tracking-[0.1em] text-accent-text">
+                New in 1.1.0
+              </span>
+              <span aria-hidden="true" className="h-3 w-px bg-accent/40" />
+              <span className="text-small text-fg">Transform</span>
+              <ArrowRight
+                aria-hidden="true"
+                className="h-3.5 w-3.5 text-accent-text"
+                strokeWidth={2}
+              />
+            </a>
+          </Reveal>
+
           <Reveal
-            delay={180}
-            className="mt-10 flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row"
+            delay={240}
+            className="mt-7 flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row"
           >
             <ActionLink href={site.downloadUrl} className="w-full sm:w-auto">
               Download for Windows
@@ -80,7 +117,7 @@ export function Hero() {
             </ActionLink>
           </Reveal>
 
-          <Reveal delay={220}>
+          <Reveal delay={280}>
             <p className="mt-5 font-display text-[12px] tracking-tight text-fg-subtle">
               {releaseLine}
             </p>
@@ -88,7 +125,7 @@ export function Hero() {
 
           {/* One row on desktop with hairline dividers; a 2x2 grid on mobile,
               which is what actually fits at 360px. */}
-          <Reveal delay={280} className="mt-12 w-full">
+          <Reveal delay={320} className="mt-12 w-full">
             <ul className="mx-auto grid max-w-[560px] grid-cols-2 gap-x-6 gap-y-4 sm:max-w-none sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-0">
               {TRUST.map(({ icon: Icon, label }, i) => (
                 <li
@@ -113,7 +150,7 @@ export function Hero() {
           </Reveal>
         </div>
 
-        <Reveal delay={340} className="mx-auto mt-16 max-w-[920px] md:mt-20">
+        <Reveal delay={380} className="mx-auto mt-16 max-w-[920px] md:mt-20">
           <HeroDemo />
         </Reveal>
       </div>

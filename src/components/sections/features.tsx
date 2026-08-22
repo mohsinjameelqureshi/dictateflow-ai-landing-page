@@ -4,6 +4,7 @@ import {
   HardDriveDownload,
   Mic,
   PanelTop,
+  Replace,
   Settings,
   WandSparkles,
 } from "lucide-react";
@@ -26,6 +27,11 @@ const FEATURES = [
     body: "Every session in your history, grouped by day. Play back the original recording, copy it, favorite it, delete it, or search the lot.",
   },
   {
+    icon: Replace,
+    title: "Transform",
+    body: "Your rewrite rules, each bound to a shortcut. One ships ready to use; add as many as you want. Every rule keeps a count of how often you have used it, so you can see which ones earn their key combination.",
+  },
+  {
     icon: BarChart3,
     title: "Insights",
     body: "Words per minute over recording time, total words, sessions, and a day streak with your best. All of it derived from local history.",
@@ -38,13 +44,13 @@ const FEATURES = [
   {
     icon: Settings,
     title: "Settings and data",
-    body: "Transcription engine and model, shortcut capture, microphone, theme, language, and your API key. Export transcripts, dictionary and settings to JSON; import skips duplicates, so re-importing is safe.",
+    body: "Transcription engine and model, shortcut capture, microphone, theme, language, and your API keys. Export transcripts, dictionary, transform rules and settings to JSON; import skips duplicates, so re-importing is safe.",
   },
 ] as const;
 
 /**
  * Shipped, but not a destination in the app's navigation — so a hairline list
- * rather than a card, which would put them at the same weight as the four
+ * rather than a card, which would put them at the same weight as the five
  * sections above.
  */
 const ALSO = [
@@ -70,12 +76,16 @@ export function Features() {
     <Section
       id="features"
       eyebrow="Inside the app"
-      heading="Four sections, and one of them is empty."
-      lead="This is the app's real navigation. Nothing here is a mock-up of something planned."
+      heading="Five sections, and none of them is empty."
+      lead="This is the app's real navigation. Nothing here is a mock-up of something planned. Transform was the empty room in 1.0.0; as of 1.1.0 it is furnished."
     >
       <div className="grid gap-4 md:grid-cols-2">
         {FEATURES.map(({ icon: Icon, title, body }, i) => (
-          <Reveal key={title} delay={i * 70}>
+          <Reveal
+            key={title}
+            delay={i * 70}
+            className={i === FEATURES.length - 1 ? "md:col-span-2" : undefined}
+          >
             <Panel className="h-full">
               <Icon
                 aria-hidden="true"
@@ -87,27 +97,6 @@ export function Features() {
             </Panel>
           </Reveal>
         ))}
-
-        {/* Muted, present, obviously not shipped. */}
-        <Reveal delay={280} className="md:col-span-2">
-          <Panel tone="sunken" className="opacity-70 shadow-none">
-            <div className="flex flex-wrap items-center gap-3">
-              <WandSparkles
-                aria-hidden="true"
-                className="h-5 w-5 text-fg-subtle"
-                strokeWidth={1.5}
-              />
-              <h3 className="text-h3 text-fg-muted">Transform</h3>
-              <span className="rounded-full border border-line px-2.5 py-0.5 text-micro text-fg-subtle">
-                Coming later
-              </span>
-            </div>
-            <p className="measure mt-3 text-body text-fg-subtle">
-              A scaffolded destination for future post-transcription rules. It
-              is in the app and it is empty. Nothing runs there yet.
-            </p>
-          </Panel>
-        </Reveal>
       </div>
 
       {/* ------------------------------------------------ also in the app -- */}

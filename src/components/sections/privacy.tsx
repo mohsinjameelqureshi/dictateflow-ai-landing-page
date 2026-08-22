@@ -36,8 +36,8 @@ const STAYS = [
   },
   {
     icon: KeyRound,
-    title: "Your Groq API key",
-    detail: "Encrypted with Windows DPAPI, keyed to your account",
+    title: "Your API keys",
+    detail: "Groq, and Gemini if you use it. Encrypted with Windows DPAPI",
   },
 ] as const;
 
@@ -67,7 +67,7 @@ export function Privacy() {
           <span className="text-accent-text">depends on the engine.</span>
         </>
       }
-      lead="That is the only thing the choice changes. Everything else the app knows about you stays inside the box below, whichever engine you pick."
+      lead="Everything the app knows about you stays inside the box below, whichever engine you pick. What crosses the line is a dictation clip, or nothing at all. Two optional features cross it separately, and they are named underneath."
     >
       <Reveal>
         <div className="grid items-center gap-0 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,280px)]">
@@ -170,7 +170,7 @@ export function Privacy() {
                 With Moonshine, nothing
               </h3>
               <p className="mt-3 text-micro text-fg-muted">
-                After the one-time model download the app makes no network
+                After the one-time model download, dictating makes no network
                 requests at all.
               </p>
             </div>
@@ -204,9 +204,11 @@ export function Privacy() {
         </div>
       </Reveal>
 
-      {/* --------------------------------------- the one honest asterisk -- */}
-      {/* Omitting this would make the offline claim overstated, which is the
-          only way this section can actually fail. */}
+      {/* ------------------------------------- the two honest asterisks -- */}
+      {/* Omitting these would make the offline claim overstated, which is the
+          only way this section can actually fail. Transform is the newer of
+          the two and by far the more likely to be used, so it is named first
+          and in full rather than folded into the sentence about cleanup. */}
       <Reveal delay={100} className="mt-10">
         <div className="container-narrow">
           <Callout>
@@ -216,15 +218,72 @@ export function Privacy() {
                 className="h-5 w-5 shrink-0 text-accent-text"
                 strokeWidth={1.5}
               />
-              <p className="text-body text-fg-muted">
-                <strong className="font-semibold text-fg">
-                  One asterisk: grammar cleanup is a Groq call regardless of
-                  which engine transcribed.
-                </strong>{" "}
-                Turning it on while using Moonshine gives up the offline
-                guarantee for that one step. It is off by default, and the rest
-                of the pipeline is unaffected either way.
-              </p>
+              <div>
+                <p className="text-body text-fg-muted">
+                  <strong className="font-semibold text-fg">
+                    Two asterisks, and the diagram above covers dictation only.
+                  </strong>{" "}
+                  Two things in the app talk to a language model, and neither
+                  one runs on your machine.
+                </p>
+
+                <p className="mt-4 text-body text-fg-muted">
+                  <strong className="font-semibold text-fg">
+                    A transform sends the text you are rewriting
+                  </strong>{" "}
+                  to Groq or to Google Gemini, whichever you picked. Press the
+                  shortcut while transcribing with Moonshine and that is the
+                  one action in the whole product that leaves your computer.
+                  The app states this in Settings rather than burying it.
+                </p>
+
+                <p className="mt-4 text-body text-fg-muted">
+                  <strong className="font-semibold text-fg">
+                    Grammar cleanup is a Groq call
+                  </strong>{" "}
+                  regardless of which engine transcribed. Turning it on while
+                  using Moonshine gives up the offline guarantee for that one
+                  step. It is off by default.
+                </p>
+
+                <p className="mt-4 text-small text-fg-subtle">
+                  Neither one is on unless you turn it on or press its
+                  shortcut. Leave both alone on Moonshine and the app makes no
+                  network requests at all.
+                </p>
+              </div>
+            </div>
+          </Callout>
+        </div>
+      </Reveal>
+
+      {/* -------------------------------------------------- the two keys -- */}
+      <Reveal delay={110} className="mt-4">
+        <div className="container-narrow">
+          <Callout>
+            <div className="flex flex-col gap-4 sm:flex-row">
+              <KeyRound
+                aria-hidden="true"
+                className="h-5 w-5 shrink-0 text-accent-text"
+                strokeWidth={1.5}
+              />
+              <div>
+                <h3 className="text-h3 text-fg">Two keys, both encrypted</h3>
+                <p className="mt-3 text-body text-fg-muted">
+                  The app stores a Groq key and, optionally, a Google Gemini
+                  key for transforms. Both are encrypted with Windows DPAPI and
+                  tied to your Windows account, stored outside the database,
+                  and never readable by the app&rsquo;s own interface: it can
+                  ask whether a key exists, not what it is. Neither key is ever
+                  included in an export.
+                </p>
+                <p className="mt-4 text-body text-fg-muted">
+                  Keys are checked by asking the provider, not by
+                  pattern-matching them. Any format either company issues is
+                  accepted, and what you get back is the provider&rsquo;s own
+                  verdict on whether your key works.
+                </p>
+              </div>
             </div>
           </Callout>
         </div>

@@ -1,8 +1,10 @@
-import { Cloud, Laptop } from "lucide-react";
+import { Cloud, Laptop, Sparkles } from "lucide-react";
 import { Section } from "@/components/ui/section";
 import { Panel } from "@/components/ui/panel";
 import { Reveal } from "@/components/ui/reveal";
 import { CodeBlock } from "@/components/ui/code-block";
+import { Callout } from "@/components/ui/callout";
+import { Kbd } from "@/components/ui/kbd";
 import { site } from "@/config/site";
 
 const BUILD_COMMANDS = `git clone ${site.githubUrl}
@@ -44,7 +46,8 @@ const GROQ_STEPS = [
       <>
         Open Settings &rarr; API and paste it. It is encrypted immediately;
         copying that file to another machine gets you nothing, because DPAPI
-        ties it to your Windows user account.
+        ties it to your Windows user account. The same key powers transforms
+        unless you give it a Gemini key below.
       </>
     ),
   },
@@ -118,7 +121,8 @@ export function Setup() {
             </p>
 
             <p className="mt-auto pt-6 text-small text-fg-subtle">
-              No key, no account, and no network after the download finishes.
+              No key and no account. Once the download finishes, dictation
+              touches nothing on the network.
             </p>
           </Panel>
         </Reveal>
@@ -168,6 +172,79 @@ export function Setup() {
           </Panel>
         </Reveal>
       </div>
+
+      {/* ------------------------------------------ optional, for transforms -- */}
+      {/* Deliberately not a third column: it is not a third path, it is a
+          preference inside one of them. Transforms already work on the Groq
+          key from the panel above, so nobody has to read this to get going. */}
+      <Reveal delay={200} className="mt-4">
+        <Panel className="flex flex-col gap-x-6 gap-y-3 sm:flex-row sm:items-baseline">
+          <span
+            className={
+              "inline-flex h-8 shrink-0 items-center rounded-chip border " +
+              "border-line px-2.5 font-display text-[12px] font-semibold " +
+              "tracking-[0.08em] text-fg-subtle"
+            }
+          >
+            OPT
+          </span>
+          <div>
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+              <h3 className="text-h3 text-fg">
+                Use Gemini for transforms instead
+              </h3>
+              <Sparkles
+                aria-hidden="true"
+                className="h-4 w-4 shrink-0 text-fg-subtle"
+                strokeWidth={1.5}
+              />
+            </div>
+            <p className="mt-2 text-body text-fg-muted">
+              Transforms run on your Groq key by default, so this is a
+              preference and not a prerequisite. To use Google Gemini instead,
+              get a free key at{" "}
+              <a
+                href="https://aistudio.google.com/apikey"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-code text-accent-text underline decoration-line underline-offset-4 hover:decoration-accent-text"
+              >
+                aistudio.google.com/apikey
+              </a>{" "}
+              and paste it into Settings &rarr; Transform. Whatever format
+              Google hands you is fine: the app asks Google whether the key
+              works rather than guessing from how it starts.
+            </p>
+          </div>
+        </Panel>
+      </Reveal>
+
+      {/* -------------------------------------------------- the first run -- */}
+      <Reveal delay={240} className="mt-10">
+        <div className="container-narrow">
+          <Callout>
+            <h3 className="text-h3 text-fg">Then try it, in that order</h3>
+            <ol className="mt-4 space-y-3">
+              <li className="text-body text-fg-muted">
+                <strong className="font-semibold text-fg">1.</strong> Open
+                ChatGPT, Claude, or anything else with a text box. Hold{" "}
+                <Kbd>Ctrl</Kbd> + <Kbd>Win</Kbd> and describe what you want,
+                roughly and out loud. Release. It lands in the box.
+              </li>
+              <li className="text-body text-fg-muted">
+                <strong className="font-semibold text-fg">2.</strong> Press{" "}
+                <Kbd>Ctrl</Kbd> + <Kbd>Alt</Kbd> + <Kbd>E</Kbd>. The rough
+                prompt becomes a structured one, in the box, before you hit
+                send.
+              </li>
+            </ol>
+            <p className="mt-4 text-small text-fg-subtle">
+              That is both halves of the product in about fifteen seconds, and
+              it is the fastest way to find out whether you want it.
+            </p>
+          </Callout>
+        </div>
+      </Reveal>
 
       <Reveal delay={100} className="mt-16">
         <div className="container-narrow">

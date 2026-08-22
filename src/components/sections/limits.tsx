@@ -27,6 +27,10 @@ const LIMITS = [
     body: "Roughly half the length of what you spoke, against 1-2 seconds for the cloud. A 10 second dictation is about 5 seconds of local compute. Longer clips close the gap.",
   },
   {
+    clause: "Transforms are not local.",
+    body: "There is no on-device option for them the way there is for transcription. Pressing a transform shortcut sends the text in your field to Groq or to Google Gemini, and that is true even when Moonshine did the transcribing. If a piece of text must never leave your machine, do not run a transform on it.",
+  },
+  {
     clause: "Grammar cleanup is off by default.",
     body: "An LLM pass over transcribed speech measurably deletes words: it has to cut something to make ungrammatical input read cleanly. It ships behind Settings → Experimental, guarded by a detector that discards the result and keeps the raw transcript whenever a word carrying meaning goes missing. The worst case is that nothing happened.",
   },
@@ -50,7 +54,7 @@ export function Limits() {
       id="limits"
       eyebrow="Known limits"
       heading="What it does not do."
-      lead="Eight things, stated plainly. This list is a feature of the page, not a disclaimer at the bottom of it."
+      lead="Nine things, stated plainly. This list is a feature of the page, not a disclaimer at the bottom of it."
     >
       <div className="container-narrow">
         <ol className="border-t border-line">

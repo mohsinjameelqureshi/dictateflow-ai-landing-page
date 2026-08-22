@@ -16,9 +16,9 @@ import { Reveal } from "@/components/ui/reveal";
  * hand-written table would.
  *
  * Moonshine is a speech-to-text model, and is never described here as a
- * language model running locally, because it is not one. The only language
- * model in the product is Groq's, in the cloud, behind an off-by-default
- * setting.
+ * language model running locally, because it is not one. Every language model
+ * the product touches runs in the cloud: Groq's for grammar cleanup, and Groq
+ * or Gemini for transforms. Nothing on this page may imply otherwise.
  */
 
 const SPECS = [
@@ -194,8 +194,18 @@ export function Engines() {
 
       <Reveal delay={160} className="mt-10">
         <p className="measure mx-auto text-pretty text-center text-lead text-fg">
-          Once the Moonshine model is downloaded, the app never contacts the
+          Once the Moonshine model is downloaded, dictating never contacts the
           network again. Airplane mode changes nothing about how it behaves.
+        </p>
+        <p className="measure mx-auto mt-3 text-pretty text-center text-small text-fg-subtle">
+          Two things are not dictation and do reach the network: a{" "}
+          <a
+            href="#transform"
+            className="underline decoration-line underline-offset-4 hover:decoration-fg-subtle"
+          >
+            transform
+          </a>{" "}
+          and optional grammar cleanup. Neither runs unless you ask for it.
         </p>
       </Reveal>
 

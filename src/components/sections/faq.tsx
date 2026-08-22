@@ -16,15 +16,15 @@ const FAQ = [
   },
   {
     q: "Do I need an API key?",
-    a: "Only for Groq, and for optional grammar cleanup. Moonshine, the local engine, needs no key and no account at all.",
+    a: "For Groq, for transforms, and for optional grammar cleanup. Moonshine, the local engine, needs no key and no account at all, so dictating on it needs nothing from you. One free Groq key covers all three.",
   },
   {
     q: "Does it work offline?",
-    a: "Yes, on the Moonshine engine. After a one-time model download the app makes no network requests, so airplane mode changes nothing. On Groq every dictation is a network call.",
+    a: "Dictation does, on the Moonshine engine. After a one-time model download, dictating makes no network requests, so airplane mode changes nothing. On Groq every dictation is a network call. Transforms and grammar cleanup are always network calls, on either engine.",
   },
   {
     q: "Does Moonshine run a language model on my machine?",
-    a: "No. Moonshine is a speech-to-text model: it turns audio into text and does nothing else. The only language model in the product is Groq's Llama 3.3, used for optional grammar cleanup, which runs in the cloud and is off by default.",
+    a: "No. Moonshine is a speech-to-text model: it turns audio into text and does nothing else. Every language model this app touches runs in the cloud, on hardware belonging to Groq or Google: transforms use one, and optional grammar cleanup uses another. Nothing that writes English runs on your machine.",
   },
   {
     q: "Why is Moonshine English only?",
@@ -37,6 +37,46 @@ const FAQ = [
   {
     q: "How fast is it?",
     a: "On Groq, 1-2 seconds from releasing the key to text appearing, about 95% of which is network round-trip and free-tier queueing. On Moonshine, roughly half the length of what you spoke: a 10 second dictation is about 5 seconds of local compute.",
+  },
+  {
+    q: "What is a transform?",
+    a: "A rule you write, bound to a shortcut. Press the shortcut and the text in your current input field is rewritten according to that rule, in place, without switching windows. One ships ready to use: Enhance prompt, on Ctrl + Alt + E.",
+  },
+  {
+    q: "How is a transform different from dictation?",
+    a: "Dictation is your voice going in. A transform works on text that is already there, whether you dictated it, typed it or pasted it.",
+  },
+  {
+    q: "What happens to my text if the AI call fails?",
+    a: "It goes back exactly where it was. That covers a dead network, a rate limit, an empty response, and pressing Esc part way through. Your clipboard is restored too.",
+  },
+  {
+    q: "Does a transform rewrite everything, or just what I selected?",
+    a: "Your selection if you have one, the whole field if you do not. In a document with nothing selected that means the whole document, so select first when the field is large.",
+  },
+  {
+    q: "Which AI does a transform use?",
+    a: "Groq or Google Gemini, your choice, set in Settings. The model list comes live from whichever you pick, so a retired model never sits in the dropdown waiting to fail.",
+  },
+  {
+    q: "My Gemini key does not start with AIza. Is it valid?",
+    a: "Probably. Google issues keys beginning AQ. as well as AIza, and this app accepts both. Rather than guessing at the format, it asks Google whether your key works and tells you the answer: there is a Check it works button on the key card.",
+  },
+  {
+    q: "How fast is a transform?",
+    a: "Typically a bit over a second. Gemini transforms run with thinking disabled, because a rewrite is not a reasoning task, and that alone roughly halves the wait.",
+  },
+  {
+    q: "Are transforms private?",
+    a: "No, and the app does not pretend otherwise. The text you transform is sent to the provider you chose, the same way dictation audio is sent to Groq. If you transcribe on-device with Moonshine, a transform is the one action that leaves your machine, and Settings says so rather than burying it.",
+  },
+  {
+    q: "Are transforms saved to my history?",
+    a: "No. They are counted per rule, so you can see which ones you actually use, but they are deliberately kept out of the dictation history: words per minute is measured against recording length, and a transform has no recording.",
+  },
+  {
+    q: "Can a transform shortcut clash with my dictation shortcut?",
+    a: "The app will not let it. It refuses any combination that contains another one. If dictation is Ctrl + Win, then Ctrl + Win + E is rejected, because pressing it would start a recording before the E registered. You are told which shortcut is in the way.",
   },
   {
     q: "Do I need an account?",
@@ -63,8 +103,8 @@ const FAQ = [
     a: "Yes. The Dictionary is find-and-replace applied after transcription, on either engine, and its entries also prime Whisper so some errors never happen on the cloud path.",
   },
   {
-    q: "Is my API key safe?",
-    a: "It is encrypted with Windows DPAPI via Electron's safeStorage, tied to your Windows account, and stored outside the database. It is never written to a backup export. If you only use Moonshine there is no key to protect.",
+    q: "Are my API keys safe?",
+    a: "Both of them are encrypted with Windows DPAPI via Electron's safeStorage, tied to your Windows account, and stored outside the database. The app's own interface cannot read them back: it can ask whether a key exists, not what it is. Neither is ever written to a backup export. If you only dictate on Moonshine there is no key to protect.",
   },
 ] as const;
 
